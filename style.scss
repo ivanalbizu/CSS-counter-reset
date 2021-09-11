@@ -1,0 +1,123 @@
+:root {
+  --color-1: #2c2c2c;
+  --color-2: #e4e4e4;
+  --color-3: #e8006a;
+  --width-number-1: 30px;
+  --width-number-2: 38px;
+  --width-number-3: 46px;
+  --font-size-1: 21px;
+  --font-size-2: 19px;
+  --font-size-3: 17px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  &,
+  &::before,
+  &::after {
+    box-sizing: border-box;
+  }
+}
+
+body {
+  font-family: "Barlow", sans-serif;
+  font-size: 1.3rem;
+  font-weight: 300;
+  line-height: 1.45;
+  color: var(--color-1);
+  background-color: var(--color-2);
+}
+h1,
+h2,
+h3,
+h4,
+p {
+  font-size: unset;
+  font-weight: unset;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+[class^="ordered-title-"] {
+  position: relative;
+  &::before {
+    display: inline-block;
+    position: absolute;
+    left: 0;
+  }
+}
+
+.layout {
+  width: 1200px;
+  max-width: 100%;
+  margin: auto;
+  padding: 1em 1.5em;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1em 3em;
+
+  @media(min-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  &--group {
+    counter-reset: counter-ordered-title-1;
+  }
+
+  .ordered-title-1 {
+    counter-reset: counter-ordered-title-2;
+    font-size: var(--font-size-1);
+    font-weight: 700;
+    text-transform: uppercase;
+    padding-left: var(--width-number-1);
+    margin-bottom: 1.5em;
+    &::before {
+      color: var(--color-3);
+      counter-increment: counter-ordered-title-1;
+      content: counter(counter-ordered-title-1) ". ";
+      width: var(--width-number-1);
+    } 
+  }
+  .ordered-title-2 {
+    counter-reset: counter-ordered-title-3;
+    font-size: var(--font-size-2);
+    font-weight: 500;
+    padding-left: var(--width-number-2);
+    margin-bottom: 1em;
+    &::before {
+      color: var(--color-3);
+      counter-increment: counter-ordered-title-2;
+      content: counter(counter-ordered-title-1) "." counter(counter-ordered-title-2) ". ";
+      width: var(--width-number-2);
+    }
+  }
+  .ordered-title-3 {
+    font-size: var(--font-size-3);
+    font-weight: 400;
+    padding-left: var(--width-number-3);
+    margin-bottom: .8em;
+    &::before {
+      color: var(--color-3);
+      counter-increment: counter-ordered-title-3;
+      content: counter(counter-ordered-title-1) "." counter(counter-ordered-title-2) "." counter(counter-ordered-title-3) ". ";
+      width: var(--width-number-3);
+    }
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: 300;
+    margin-bottom: 1em;
+    padding-left: var(--width-number-1);
+  }
+  .ordered-title-1 ~ p {
+    padding-left: var(--width-number-1);
+  }
+  .ordered-title-2 ~ p {
+    padding-left: var(--width-number-2);
+  }
+  .ordered-title-3 ~ p {
+    padding-left: var(--width-number-3);
+  }
+}
